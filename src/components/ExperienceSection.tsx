@@ -63,7 +63,50 @@ export default function ExperienceSection() {
           </p>
         </div>
         
-        <div className="relative max-w-4xl mx-auto">
+        {/* Mobile Timeline */}
+        <div className="md:hidden">
+          {experiences.map((item) => (
+            <div 
+              key={item.id}
+              className="mb-8 last:mb-0 bg-white dark:bg-gray-800 rounded-xl shadow-lg p-6 border border-gray-100 dark:border-gray-700"
+            >
+              <div className="flex items-center gap-3 mb-4">
+                <div className={cn(
+                  "flex items-center justify-center w-12 h-12 rounded-full",
+                  "bg-primary/10 dark:bg-primary/20 text-primary"
+                )}>
+                  {item.type === 'work' ? <Briefcase size={20} /> : <GraduationCap size={20} />}
+                </div>
+                <div>
+                  <span className={cn(
+                    "inline-block px-3 py-1 text-xs font-medium rounded-full mb-1",
+                    item.type === 'work' 
+                      ? "bg-blue-100 text-blue-800 dark:bg-blue-900/30 dark:text-blue-300" 
+                      : "bg-green-100 text-green-800 dark:bg-green-900/30 dark:text-green-300"
+                  )}>
+                    {item.type === 'work' ? 'Work Experience' : 'Education'}
+                  </span>
+                  <h3 className="text-xl font-bold">{item.title}</h3>
+                </div>
+              </div>
+              
+              <div className="ml-15 pl-6 border-l-2 border-gray-200 dark:border-gray-700">
+                <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-300 mb-2">
+                  <span className="font-medium">{item.company}</span>
+                  <span>•</span>
+                  <span>{item.location}</span>
+                </div>
+                
+                <time className="block text-sm font-medium text-primary mb-3">{item.period}</time>
+                
+                <p className="text-gray-600 dark:text-gray-300">{item.description}</p>
+              </div>
+            </div>
+          ))}
+        </div>
+        
+        {/* Desktop Timeline */}
+        <div className="hidden md:block relative max-w-4xl mx-auto">
           {/* Timeline Center Line */}
           <div className="absolute left-1/2 transform -translate-x-1/2 top-0 h-full w-0.5 bg-gray-200 dark:bg-gray-700" />
           
@@ -72,30 +115,30 @@ export default function ExperienceSection() {
             <div 
               key={item.id} 
               className={cn(
-                "relative flex items-center mb-12 last:mb-0",
+                "relative flex items-center mb-16 last:mb-0 group",
                 index % 2 === 0 ? "flex-row-reverse" : ""
               )}
             >
               {/* Timeline Dot */}
               <div className="absolute left-1/2 transform -translate-x-1/2 -translate-y-1/2 z-10">
                 <div className={cn(
-                  "flex items-center justify-center w-12 h-12 rounded-full",
-                  "bg-white dark:bg-gray-800 shadow-md border-4 border-primary",
-                  "text-primary"
+                  "flex items-center justify-center w-14 h-14 rounded-full",
+                  "bg-white dark:bg-gray-800 shadow-lg border-4 border-primary",
+                  "text-primary transition-all duration-300 group-hover:scale-110"
                 )}>
-                  {item.type === 'work' ? <Briefcase size={20} /> : <GraduationCap size={20} />}
+                  {item.type === 'work' ? <Briefcase size={22} /> : <GraduationCap size={22} />}
                 </div>
               </div>
               
               {/* Content */}
               <div className={cn(
                 "w-1/2 px-4",
-                index % 2 === 0 ? "text-right pr-12" : "pl-12"
+                index % 2 === 0 ? "text-right pr-16" : "pl-16"
               )}>
                 <div className={cn(
                   "bg-white dark:bg-gray-800 p-6 rounded-xl shadow-lg",
                   "border border-gray-100 dark:border-gray-700",
-                  "transition-all hover:shadow-xl hover:transform hover:-translate-y-1"
+                  "transition-all duration-300 group-hover:shadow-xl group-hover:-translate-y-1"
                 )}>
                   <span className={cn(
                     "inline-block px-3 py-1 text-xs font-medium rounded-full mb-3",
@@ -106,7 +149,7 @@ export default function ExperienceSection() {
                     {item.type === 'work' ? 'Work Experience' : 'Education'}
                   </span>
                   
-                  <h3 className="text-xl font-bold mb-1">{item.title}</h3>
+                  <h3 className="text-xl font-bold mb-2">{item.title}</h3>
                   
                   <div className="flex items-center gap-1 text-sm text-gray-600 dark:text-gray-300 mb-3">
                     <span className="font-medium">{item.company}</span>

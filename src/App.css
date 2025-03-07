@@ -1,1 +1,9 @@
+
 /* Custom App styles */
+
+@media (max-width: 768px) {
+  #experience .section-container {
+    padding-left: 1rem;
+    padding-right: 1rem;
+  }
+}
